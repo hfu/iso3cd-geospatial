@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+<link rel="stylesheet" type="text/css" href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css"/>
+<style>
+body { margin: 0; top: 0; bottom: 0; width: 100%; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js"></script>
+</head>
+<body>
+<div id="map"></div>
+<script>
+data = [
+{"iso3cd":"AFG","value":22},
+{"iso3cd":"ALB","value":64},
+{"iso3cd":"DZA","value":50},
+{"iso3cd":"AND","value":63},
+{"iso3cd":"AGO","value":100},
+{"iso3cd":"ATG","value":0},
+{"iso3cd":"ARG","value":100},
+{"iso3cd":"ARM","value":90},
+{"iso3cd":"AUS","value":100},
+{"iso3cd":"AUT","value":80},
+{"iso3cd":"AZE","value":90},
+{"iso3cd":"BHS","value":33},
+{"iso3cd":"BHR","value":56},
+{"iso3cd":"BGD","value":80},
+{"iso3cd":"BRB","value":33},
+{"iso3cd":"BLR","value":78},
+{"iso3cd":"BEL","value":70},
+{"iso3cd":"BLZ","value":18},
+{"iso3cd":"BEN","value":80},
+{"iso3cd":"BTN","value":100},
+{"iso3cd":"BOL","value":0},
+{"iso3cd":"BIH","value":0},
+{"iso3cd":"BWA","value":57},
+{"iso3cd":"BRA","value":30},
+{"iso3cd":"BRN","value":0},
+{"iso3cd":"BGR","value":100},
+{"iso3cd":"BFA","value":0},
+{"iso3cd":"BDI","value":22},
+{"iso3cd":"CPV","value":0},
+{"iso3cd":"KHM","value":60},
+{"iso3cd":"CMR","value":57},
+{"iso3cd":"CAN","value":89},
+{"iso3cd":"CAF","value":0},
+{"iso3cd":"TCD","value":13},
+{"iso3cd":"CHL","value":91},
+{"iso3cd":"CHN","value":88},
+{"iso3cd":"COL","value":91},
+{"iso3cd":"COM","value":17},
+{"iso3cd":"COG","value":40},
+{"iso3cd":"COK","value":0},
+{"iso3cd":"CRI","value":0},
+{"iso3cd":"CIV","value":0},
+{"iso3cd":"HRV","value":56},
+{"iso3cd":"CUB","value":88},
+{"iso3cd":"CYP","value":89},
+{"iso3cd":"CZE","value":0},
+{"iso3cd":"PRK","value":0},
+{"iso3cd":"COD","value":0},
+{"iso3cd":"DNK","value":100},
+{"iso3cd":"DJI","value":22},
+{"iso3cd":"DMA","value":29},
+{"iso3cd":"DOM","value":0},
+{"iso3cd":"ECU","value":100},
+{"iso3cd":"EGY","value":20},
+{"iso3cd":"SLV","value":0},
+{"iso3cd":"GNQ","value":0},
+{"iso3cd":"ERI","value":25},
+{"iso3cd":"EST","value":78},
+{"iso3cd":"ETH","value":56},
+{"iso3cd":"FJI","value":60},
+{"iso3cd":"FIN","value":56},
+{"iso3cd":"FRA","value":90},
+{"iso3cd":"GAB","value":50},
+{"iso3cd":"GMB","value":29},
+{"iso3cd":"GEO","value":56},
+{"iso3cd":"DEU","value":80},
+{"iso3cd":"GHA","value":56},
+{"iso3cd":"GRC","value":90},
+{"iso3cd":"GRD","value":0},
+{"iso3cd":"GTM","value":100},
+{"iso3cd":"GIN","value":50},
+{"iso3cd":"GNB","value":11},
+{"iso3cd":"GUY","value":30},
+{"iso3cd":"HTI","value":57},
+{"iso3cd":"VAT","value":0},
+{"iso3cd":"HND","value":100},
+{"iso3cd":"HUN","value":67},
+{"iso3cd":"ISL","value":67},
+{"iso3cd":"IND","value":63},
+{"iso3cd":"IDN","value":40},
+{"iso3cd":"IRN","value":0},
+{"iso3cd":"IRQ","value":80},
+{"iso3cd":"IRL","value":88},
+{"iso3cd":"ISR","value":78},
+{"iso3cd":"ITA","value":100},
+{"iso3cd":"JAM","value":44},
+{"iso3cd":"JPN","value":70},
+{"iso3cd":"JOR","value":89},
+{"iso3cd":"KAZ","value":90},
+{"iso3cd":"KEN","value":75},
+{"iso3cd":"KIR","value":40},
+{"iso3cd":"KWT","value":89},
+{"iso3cd":"KGZ","value":78},
+{"iso3cd":"LAO","value":0},
+{"iso3cd":"LVA","value":78},
+{"iso3cd":"LBN","value":86},
+{"iso3cd":"LSO","value":18},
+{"iso3cd":"LBR","value":29},
+{"iso3cd":"LBY","value":20},
+{"iso3cd":"LIE","value":63},
+{"iso3cd":"LTU","value":100},
+{"iso3cd":"LUX","value":67},
+{"iso3cd":"MDG","value":50},
+{"iso3cd":"MWI","value":60},
+{"iso3cd":"MYS","value":20},
+{"iso3cd":"MDV","value":67},
+{"iso3cd":"MLI","value":27},
+{"iso3cd":"MLT","value":50},
+{"iso3cd":"MHL","value":0},
+{"iso3cd":"MRT","value":70},
+{"iso3cd":"MUS","value":78},
+{"iso3cd":"MEX","value":91},
+{"iso3cd":"FSM","value":0},
+{"iso3cd":"MCO","value":78},
+{"iso3cd":"MNG","value":100},
+{"iso3cd":"MNE","value":100},
+{"iso3cd":"MAR","value":55},
+{"iso3cd":"MOZ","value":33},
+{"iso3cd":"MMR","value":60},
+{"iso3cd":"NAM","value":56},
+{"iso3cd":"NRU","value":50},
+{"iso3cd":"NPL","value":78},
+{"iso3cd":"NLD","value":90},
+{"iso3cd":"NZL","value":0},
+{"iso3cd":"NIC","value":40},
+{"iso3cd":"NER","value":82},
+{"iso3cd":"NGA","value":9},
+{"iso3cd":"NIU","value":0},
+{"iso3cd":"NOR","value":89},
+{"iso3cd":"OMN","value":100},
+{"iso3cd":"PAK","value":78},
+{"iso3cd":"PLW","value":100},
+{"iso3cd":"PAN","value":50},
+{"iso3cd":"PNG","value":0},
+{"iso3cd":"PRY","value":82},
+{"iso3cd":"PER","value":73},
+{"iso3cd":"PHL","value":70},
+{"iso3cd":"POL","value":89},
+{"iso3cd":"PRT","value":90},
+{"iso3cd":"QAT","value":100},
+{"iso3cd":"KOR","value":0},
+{"iso3cd":"MDA","value":0},
+{"iso3cd":"ROU","value":56},
+{"iso3cd":"RUS","value":0},
+{"iso3cd":"RWA","value":90},
+{"iso3cd":"KNA","value":0},
+{"iso3cd":"LCA","value":0},
+{"iso3cd":"VCT","value":0},
+{"iso3cd":"WSM","value":71},
+{"iso3cd":"SMR","value":0},
+{"iso3cd":"STP","value":0},
+{"iso3cd":"SAU","value":0},
+{"iso3cd":"SEN","value":82},
+{"iso3cd":"SRB","value":90},
+{"iso3cd":"SYC","value":55},
+{"iso3cd":"SLE","value":0},
+{"iso3cd":"SGP","value":100},
+{"iso3cd":"SVK","value":100},
+{"iso3cd":"SVN","value":78},
+{"iso3cd":"SLB","value":0},
+{"iso3cd":"SOM","value":0},
+{"iso3cd":"ZAF","value":0},
+{"iso3cd":"SSD","value":0},
+{"iso3cd":"ESP","value":100},
+{"iso3cd":"LKA","value":0},
+{"iso3cd":"PSE","value":0},
+{"iso3cd":"SDN","value":86},
+{"iso3cd":"SUR","value":71},
+{"iso3cd":"SWZ","value":22},
+{"iso3cd":"SWE","value":100},
+{"iso3cd":"CHE","value":100},
+{"iso3cd":"SYR","value":0},
+{"iso3cd":"TJK","value":100},
+{"iso3cd":"THA","value":67},
+{"iso3cd":"MKD","value":0},
+{"iso3cd":"TLS","value":67},
+{"iso3cd":"TGO","value":40},
+{"iso3cd":"TON","value":50},
+{"iso3cd":"TTO","value":0},
+{"iso3cd":"TUN","value":80},
+{"iso3cd":"TUR","value":70},
+{"iso3cd":"TKM","value":100},
+{"iso3cd":"TUV","value":67},
+{"iso3cd":"UGA","value":50},
+{"iso3cd":"UKR","value":90},
+{"iso3cd":"ARE","value":0},
+{"iso3cd":"GBR","value":0},
+{"iso3cd":"TZA","value":0},
+{"iso3cd":"USA","value":0},
+{"iso3cd":"URY","value":82},
+{"iso3cd":"UZB","value":75},
+{"iso3cd":"VUT","value":71},
+{"iso3cd":"VEN","value":0},
+{"iso3cd":"VNM","value":0},
+{"iso3cd":"YEM","value":44},
+{"iso3cd":"ZMB","value":25},
+{"iso3cd":"ZWE","value":25}
+]
+
+expression = ["match", ["get", "iso3cd"]]
+data.forEach(function(row) {
+  color = null
+  if (row.value === 0) {
+    color = ["rgb", 153, 0, 51]
+  } else if (row.value <= 50) {
+    color = ["rgb", 255, 117, 25]
+  } else if (row.value < 100) {
+    color = ["rgb", 48, 131, 255]
+  } else {
+    color = ["rgb", 0, 61, 153]
+  }
+  expression.push(row.iso3cd, color)
+})
+expression.push(["rgb", 224, 224, 224])
+
+style = {
+  "version": 8,
+  "sprite": "https://hfu.github.io/unite-sprite/sprite",
+  "glyphs": "https://vectortiles.xyz/fonts/{fontstack}/{range}.pbf",
+  "sources": {
+    "iso3cd": {
+      "type": "geojson",
+      "data": "https://hfu.github.io/iso3cd-scaffold/scaffold.geojson"
+    }
+  },
+  "layers": [
+    {
+      "id": "iso3cd-circle",
+      "type": "circle",
+      "source": "iso3cd",
+      "layout": {},
+      "paint": {
+        "circle-radius": [
+          "interpolate",
+          [
+            "exponential",
+            2
+          ],
+          [
+            "zoom"
+          ],
+          0,
+          4,
+          6,
+          400
+        ],
+        "circle-color": expression
+      }
+    },
+    {
+      "id": "iso3cd-symbol",
+      "type": "symbol",
+      "source": "iso3cd",
+      "minzoom": 2,
+      "layout": {
+        "text-font": [
+          "sans"
+        ],
+        "text-field": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "get",
+            "iso3cd"
+          ],
+          4,
+          [
+            "get",
+            "name"
+          ]
+        ]
+      },
+      "paint": {
+        "text-color": [
+          "rgb",
+          255,
+          255,
+          255
+        ]
+      }
+    }
+  ]
+}
+
+map = new mapboxgl.Map({
+  container: 'map', 
+  style: style,
+  attributionControl: true, hash: true
+})
+
+map.on('load', function() {
+  map.addControl(new mapboxgl.NavigationControl())
+})
+</script>
+</body>
+</html>
