@@ -14,8 +14,32 @@ body { margin: 0; top: 0; bottom: 0; width: 100%; }
 <body>
 <div id="map"></div>
 <script>
-console.log(document.location.url.split('?')[1])
+function loadScript(src, callback) {
+  var done = false
+  var head = document.getElementsByTagName('head')[0]
+  var script = document.createElement('script')
+  script.onload = script.onreadlystatechange = function() {
+    if (
+      !done && 
+      (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete')
+    ) {
+      done = true
+      callback()
+      script.onload = script.onreadystatechange = null
+      if (head && script.parentNode) { head.removeChild(script) }
+    }
+  }
+  script.src = src
+  head.appendChild(script)
+}
+  
+var clientUrl = document.location.href.split('?')[1]
+console.log('loading ' + clientUrl)
 
+loadScript(clientUrl, function() {
+  console.log('yay')
+})
+  
 data = [
 {"iso3cd":"AFG","value":22},
 {"iso3cd":"ALB","value":64},
