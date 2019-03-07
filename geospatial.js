@@ -18,11 +18,12 @@ function loadScript (src, callback) {
 }
 
 var clientUrl = document.location.href.split('?')[1]
+if (!clientUrl) {
+  clientUrl = 'https://hfu.github.io/iso3cd-geospatial/default.js
+}
 console.log('loading ' + clientUrl)
 
 loadScript(clientUrl, function () {
-  console.log('yay')
-
   expression = ['match', ['get', 'iso3cd']]
   cartotiles.data.forEach(function (row) {
     expression.push(row[0], cartotiles.color(row[1]))
