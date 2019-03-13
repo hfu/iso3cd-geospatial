@@ -112,19 +112,21 @@ loadScript(clientUrl, function () {
     map.addControl(new mapboxgl.NavigationControl())
   })
   
-  popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false })
+  popup = new mapboxgl.Popup({ closeOnClick: false })
   
   map.on('mouseenter', 'iso3cd-circle', function(e) {
     map.getCanvas().style.cursor = 'pointer'
+  })
+  
+  map.on('click', 'iso3cd-circle', function(e) {
     var coordinates = e.features[0].geometry.coordinates.slice()
     var description = '<h3>' + e.features[0].properties.iso3cd + '</h3><h4>' +
       e.features[0].properties.name + '</h4>'
     for (var i in cartotiles.data) {
       if (cartotiles.data[i][0] == e.features[0].properties.iso3cd) {
-        description += JSON.stringify(cartotiles.data[i][1])
+        description += '<h1>' + cartotiles.data[i][1] + '</h1>'
       }
     }
-    
     popup.setLngLat(coordinates)
       .setHTML(description)
       .addTo(map)
