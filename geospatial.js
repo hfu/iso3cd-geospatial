@@ -42,6 +42,18 @@ loadScript(clientUrl, function () {
     },
     'layers': [
       {
+        id: 'background',
+        type: 'background',
+        paint: {
+          'background-color': [
+            'rgb',
+            230,
+            233,
+            242
+          ]
+        }
+      },
+      {
         'id': 'iso3cd-circle',
         'type': 'circle',
         'source': 'iso3cd',
