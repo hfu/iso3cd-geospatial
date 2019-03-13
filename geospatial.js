@@ -111,4 +111,21 @@ loadScript(clientUrl, function () {
   map.on('load', function () {
     map.addControl(new mapboxgl.NavigationControl())
   })
+  
+  popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false })
+  
+  map.on('mouseenter', 'iso3cd-circle', function(e) {
+    map.getCanvas().style.cursor = 'pointer'
+    var coordinates = e.features[0].geometry.coordinates.slice()
+    var description = e.features[0].properties
+    
+    popup.setLngLat(coordinates)
+      .setHTML(description)
+      .addTo(map)
+  })
+  
+  map.on('mouseleave', 'iso3cd-circle', function() {
+    map.getCanvas().style.cursor = ''
+    popup.remove()
+  })
 })
