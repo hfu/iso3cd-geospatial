@@ -117,7 +117,13 @@ loadScript(clientUrl, function () {
   map.on('mouseenter', 'iso3cd-circle', function(e) {
     map.getCanvas().style.cursor = 'pointer'
     var coordinates = e.features[0].geometry.coordinates.slice()
-    var description = e.features[0].properties
+    var description = '<h3>' + e.features[0].properties.iso3cd + '</h3><h4>' +
+      e.features[0].properties.name + '</h4>'
+    for (var i in cartotiles.data) {
+      if (cartotiles.data[i][0] == e.features[0].properties.iso3cd) {
+        description += JSON.stringify(cartotiles.data[i][1])
+      }
+    }
     
     popup.setLngLat(coordinates)
       .setHTML(description)
