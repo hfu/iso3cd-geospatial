@@ -134,6 +134,5 @@ loadScript(clientUrl, function () {
   
   map.on('mouseleave', 'iso3cd-circle', function() {
     map.getCanvas().style.cursor = ''
-    popup.remove()
   })
 })
