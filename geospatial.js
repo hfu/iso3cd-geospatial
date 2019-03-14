@@ -122,6 +122,7 @@ loadScript(clientUrl, function () {
 
   map.on('load', function () {
     map.addControl(new mapboxgl.NavigationControl())
+    map.scrollZoom.disable()
   })
   
   popup = new mapboxgl.Popup({ closeOnClick: false })
